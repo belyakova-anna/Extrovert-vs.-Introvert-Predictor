@@ -1,0 +1,29 @@
+services:
+  airflow:
+    build: .
+    container_name: airflow_standalone
+    restart: unless-stopped
+    environment:
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor
+      - AIRFLOW_UID=50000
+      - AIRFLOW_GID=0
+      - PROJECT_ROOT=/opt/project
+    command: >
+      bash -lc "
+      airflow db init &&
+      airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com || true &&
+      airflow standalone"
+    ports:
+      - "8080:8080"   # Airflow Web UI
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ../../:/opt/project  # mount entire repo to access code and data
+      - /var/run/docker.sock:/var/run/docker.sock  # allow docker compose from deploy task
+    deploy:
+      resources:
+        limits:
+          memory: 2048m
+        reservations:
+          memory: 512m

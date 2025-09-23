@@ -40,5 +40,6 @@ env/
 
 # Docker
 *.log
+logs
 
 
