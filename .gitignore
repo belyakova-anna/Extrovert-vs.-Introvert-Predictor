@@ -38,14 +38,6 @@ env/
 .vscode/
 .idea/
 
-# Data and model artifacts
-models/*.pkl
-models/*.joblib
-code/datasets/submission.csv
-code/datasets/*.parquet
-code/datasets/*.feather
-code/datasets/*.pkl
-
 # Docker
 *.log
 
