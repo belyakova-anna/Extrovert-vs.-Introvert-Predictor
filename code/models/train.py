@@ -145,18 +145,6 @@ def train_model(train_df: pd.DataFrame, test_df: pd.DataFrame):
     print("Accuracy:", round(acc, 4))
     print("ROC-AUC:", round(roc, 4))
 
-    # Optional MLflow logging
-    if _MLFLOW_AVAILABLE:
-        try:
-            with mlflow.start_run(run_name="rf_personality"):
-                mlflow.log_param("model", "RandomForestClassifier")
-                mlflow.log_param("n_estimators", 400)
-                mlflow.log_metric("val_accuracy", float(acc))
-                mlflow.log_metric("val_roc_auc", float(roc))
-        except Exception as _:
-            # Non-fatal if MLflow misconfigured
-            pass
-
     # Train final model on all train data
     best_model = rf_clf
     best_model.fit(X_full, y)
