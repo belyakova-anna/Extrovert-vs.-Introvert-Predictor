@@ -18,8 +18,8 @@ RUN pip install --no-cache-dir \
     scikit-learn \
     pydantic
 
-# Copy project
-COPY ../.. /app
+# Copy project (build context is repo root)
+COPY . /app
 
 EXPOSE 8000
 

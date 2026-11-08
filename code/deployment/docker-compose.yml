@@ -10,8 +10,6 @@ services:
       - "8000:8000"
     environment:
       - PYTHONUNBUFFERED=1
-    volumes:
-      - ../../models:/app/models:ro
     restart: unless-stopped
 
   app:
@@ -26,8 +24,4 @@ services:
       - API_BASE_URL=http://api:8000
     ports:
       - "8501:8501"
-    volumes:
-      - ../../models:/app/models:ro
     restart: unless-stopped
-
-

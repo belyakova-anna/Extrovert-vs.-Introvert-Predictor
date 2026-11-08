@@ -21,6 +21,8 @@ services:
       - ./logs:/opt/airflow/logs
       - ../../:/opt/project  # mount entire repo to access code and data
       - /var/run/docker.sock:/var/run/docker.sock  # allow docker compose from deploy task
+    group_add:
+      - "958"  # host docker group GID — needed to access docker.sock
     deploy:
       resources:
         limits:

@@ -17,8 +17,8 @@ RUN pip install --no-cache-dir \
     pandas \
     scikit-learn
 
-# Copy project
-COPY ../.. /app
+# Copy project (build context is repo root)
+COPY . /app
 
 ENV API_BASE_URL="http://api:8000"
 
